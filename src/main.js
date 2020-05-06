@@ -1,8 +1,15 @@
-import Vue from 'vue'
-import App from './App.vue'
+import SimpleButton from './components/SimpleButton.vue'
 
-Vue.config.productionTip = false
+import store from './store.js'
 
-new Vue({
-  render: h => h(App),
-}).$mount('#app')
+export default {
+  install (Vue, options) {
+    if (!options || !options.store) {
+      throw new Error('Please initialise plugin with a Vuex store.')
+    }
+    
+    options.store.registerModule('simplebutton', store)
+ 
+    Vue.component('simple-button', SimpleButton)
+  }
+}
